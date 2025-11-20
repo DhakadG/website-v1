@@ -1,369 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Tic-Tac-Toe | Ultimate Gaming Experience</title>
-    <meta name="description" content="Play the most advanced Tic-Tac-Toe game with stunning visuals, sound effects, and customizable player names.">
-    <meta name="keywords" content="tic-tac-toe, game, online, modern, interactive">
-    <meta name="author" content="Modern Games Studio">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Advanced Tic-Tac-Toe with AI, Rapid Mode, and Tactical Variants.">
+    <title>Neo Tic-Tac-Toe | 2025 Edition</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
 </head>
 <body>
-    <!-- Player Setup Modal -->
-    <div class="modal-overlay" id="setup-modal">
-        <div class="setup-modal">
-            <div class="setup-content">
-                <div class="setup-header">
-                    <div class="setup-icon">🎮</div>
-                    <h2 class="setup-title">Welcome to Modern Tic-Tac-Toe</h2>
-                    <p class="setup-subtitle">The Ultimate Gaming Experience</p>
-                </div>
-                
-                <div class="setup-form">
-                    <div class="player-setup">
-                        <div class="player-input-group">
-                            <label for="player1-name" class="player-label">
-                                <span class="player-symbol x-symbol">✖</span>
-                                Player 1 (X)
-                            </label>
-                            <input 
-                                type="text" 
-                                id="player1-name" 
-                                class="player-input" 
-                                placeholder="Enter Player 1 name" 
-                                maxlength="15"
-                                autocomplete="off"
-                            >
-                        </div>
-                        
-                        <div class="vs-divider">
-                            <span class="vs-text">VS</span>
-                        </div>
-                        
-                        <div class="player-input-group">
-                            <label for="player2-name" class="player-label">
-                                <span class="player-symbol o-symbol">⭕</span>
-                                Player 2 (O)
-                            </label>
-                            <input 
-                                type="text" 
-                                id="player2-name" 
-                                class="player-input" 
-                                placeholder="Enter Player 2 name" 
-                                maxlength="15"
-                                autocomplete="off"
-                            >
-                        </div>
-                    </div>
-                    
-                    <div class="setup-actions">
-                        <button class="btn-primary btn-large" id="start-game-btn">
-                            <span>🚀</span>
-                            Start Game
-                        </button>
-                        <button class="btn-secondary" id="quick-start-btn">
-                            <span>⚡</span>
-                            Quick Start
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="game-features">
-                    <div class="feature">
-                        <span class="feature-icon">🎨</span>
-                        <span class="feature-text">Modern UI</span>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">🔊</span>
-                        <span class="feature-text">Sound Effects</span>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">📊</span>
-                        <span class="feature-text">Score Tracking</span>
-                    </div>
-                    <div class="feature">
-                        <span class="feature-icon">⌨️</span>
-                        <span class="feature-text">Keyboard Support</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <!-- Animated Aurora Background -->
+    <div class="aurora-bg">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+        <div class="noise-overlay"></div>
     </div>
 
-    <!-- Animated Background -->
-    <div class="background-animation">
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-    </div>
+    <div class="app-wrapper">
 
-    <!-- Game Header -->
-    <header class="game-header">
-        <div class="brand-section">
-            <div class="game-logo">
-                <span class="logo-icon">🎯</span>
-                <h1 class="game-title">
-                    <span class="title-gradient">TIC</span>
-                    <span class="title-outline">TAC</span>
-                    <span class="title-gradient">TOE</span>
-                </h1>
-                <span class="game-tagline">Modern Gaming Experience</span>
+        <!-- HEADER -->
+        <header class="pro-header">
+            <div class="header-section start">
+                <div class="logo-chip">
+                    <div class="logo-symbol">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="9" stroke-opacity="0.3" stroke-width="1.5"/></svg>
+                    </div>
+                    <span class="logo-text">TicTac<span class="highlight">Toe</span></span>
+                </div>
             </div>
-            
-            <div class="game-info">
-                <button class="info-btn" id="info-btn" title="Game Information">
-                    <span>ℹ️</span>
+
+            <div class="header-section center">
+                <div class="status-pill" id="header-mode-badge">
+                    <span class="pill-icon">🤖</span>
+                    <span class="pill-label">AI</span>
+                </div>
+                <div class="separator">/</div>
+                <div class="status-pill" id="header-diff-badge">
+                    <span class="diff-dot" id="diff-dot-color"></span>
+                    <span class="pill-label">Classic</span>
+                </div>
+            </div>
+
+            <div class="header-section end">
+                <button class="control-item" id="theme-toggle" title="Toggle Theme">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
-                <button class="settings-btn" id="settings-btn" title="Game Settings">
-                    <span>⚙️</span>
+                <button class="control-item" id="sound-toggle" title="Toggle Sound">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <div class="divider-vertical"></div>
+                <button class="control-item settings-trigger" id="info-btn" title="Settings">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
                 </button>
             </div>
-        </div>
-        
-        <div class="game-stats">
-            <div class="score-board">
-                <div class="player-score" id="player1-section">
-                    <div class="player-avatar x-avatar">
-                        <span class="avatar-symbol">✖</span>
-                    </div>
-                    <div class="player-info">
-                        <span class="player-name" id="player1-display">Player 1</span>
-                        <span class="score" id="scoreX">0</span>
-                    </div>
-                </div>
-                
-                <div class="score-divider">
-                    <div class="round-info">
-                        <span class="round-label">Round</span>
-                        <span class="round-number" id="round-number">1</span>
-                    </div>
-                </div>
-                
-                <div class="player-score" id="player2-section">
-                    <div class="player-info">
-                        <span class="player-name" id="player2-display">Player 2</span>
-                        <span class="score" id="scoreO">0</span>
-                    </div>
-                    <div class="player-avatar o-avatar">
-                        <span class="avatar-symbol">⭕</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="current-turn">
-                <div class="turn-indicator" id="turn-indicator-container">
-                    <span class="turn-icon" id="turn-icon">✖</span>
-                    <span class="turn-text" id="turn-indicator">Player 1's Turn</span>
-                </div>
-            </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Game Container -->
-    <main class="game-main">
-        <div class="game-container">
-            <div class="game-board-wrapper">
-                <div class="game-board" id="game-board">
-                    <button class="box" data-index="0" aria-label="Cell 1"></button>
-                    <button class="box" data-index="1" aria-label="Cell 2"></button>
-                    <button class="box" data-index="2" aria-label="Cell 3"></button>
-                    <button class="box" data-index="3" aria-label="Cell 4"></button>
-                    <button class="box" data-index="4" aria-label="Cell 5"></button>
-                    <button class="box" data-index="5" aria-label="Cell 6"></button>
-                    <button class="box" data-index="6" aria-label="Cell 7"></button>
-                    <button class="box" data-index="7" aria-label="Cell 8"></button>
-                    <button class="box" data-index="8" aria-label="Cell 9"></button>
-                </div>
-                
-                <div class="winning-line" id="winning-line"></div>
-            </div>
-            
-            <!-- Game Controls -->
-            <div class="game-controls">
-                <div class="primary-controls">
-                    <button class="btn-primary reset-btn" id="reset-btn">
-                        <span>🔄</span>
-                        New Round
-                    </button>
-                    <button class="btn-secondary change-names-btn" id="change-names-btn">
-                        <span>👤</span>
-                        Change Names
-                    </button>
-                </div>
-                
-                <div class="secondary-controls">
-                    <button class="btn-secondary sound-toggle" id="sound-toggle">
-                        <span id="sound-icon">🔊</span>
-                        Sound
-                    </button>
-                    <button class="btn-secondary theme-toggle" id="theme-toggle">
-                        <span>🎨</span>
-                        Theme
-                    </button>
-                    <button class="btn-secondary fullscreen-btn" id="fullscreen-btn">
-                        <span>📱</span>
-                        Fullscreen
-                    </button>
-                </div>
-                
-                <div class="game-stats-mini">
-                    <div class="stat-item">
-                        <span class="stat-label">Games Played</span>
-                        <span class="stat-value" id="games-played">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Total Moves</span>
-                        <span class="stat-value" id="total-moves">0</span>
+        <!-- GAME STAGE -->
+        <main class="game-stage">
+            <!-- Stats -->
+            <div class="stats-container glass-panel">
+                <div class="player-card" id="p1-card">
+                    <div class="avatar avatar-x"><span>✕</span></div>
+                    <div class="p-info">
+                        <span class="p-name" id="p1-name">You</span>
+                        <span class="p-score" id="score-x">0</span>
                     </div>
                 </div>
+                <div class="mid-stats">
+                    <span class="vs-label">VS</span>
+                    <span class="round-badge">Round <span id="round-num">1</span></span>
+                </div>
+                <div class="player-card right-aligned" id="p2-card">
+                    <div class="p-info">
+                        <span class="p-name" id="p2-name">CPU</span>
+                        <span class="p-score" id="score-o">0</span>
+                    </div>
+                    <div class="avatar avatar-o"><span>◯</span></div>
+                </div>
             </div>
-        </div>
-    </main>
 
-    <!-- Victory Modal -->
-    <div class="modal-overlay hide" id="victory-modal">
-        <div class="victory-modal">
-            <div class="victory-content">
-                <div class="victory-header">
-                    <div class="victory-icon" id="victory-icon">🏆</div>
-                    <h2 class="victory-title" id="victory-title">Congratulations!</h2>
-                    <p class="victory-message" id="victory-message">Player 1 Wins!</p>
+            <!-- Board -->
+            <!-- NOTE: Correct class is board-wrapper to match CSS -->
+            <div class="board-wrapper glass-panel">
+                <div class="game-grid" id="game-board">
+                    <!-- Generated by JS -->
                 </div>
-                
-                <div class="victory-stats">
-                    <div class="stat-row">
-                        <span class="stat-label">Winning Pattern:</span>
-                        <span class="stat-value" id="winning-pattern">Row 1</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Moves Made:</span>
-                        <span class="stat-value" id="moves-count">5</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Game Duration:</span>
-                        <span class="stat-value" id="game-duration">0:45</span>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <button id="restart-btn" class="btn btn-primary-outline">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/></svg>
+                    Restart Round
+                </button>
+                <button id="new-game-btn" class="btn btn-secondary">Setup New Match</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- SETUP MODAL (MENU) -->
+    <div id="setup-modal" class="modal-overlay visible">
+        <div class="modal-card menu-design">
+
+            <button class="modal-close-x" id="close-setup-btn">×</button>
+
+            <div class="menu-header">
+                <h2>Initialize Match</h2>
+                <p class="subtitle">Select your game protocol</p>
+            </div>
+
+            <div class="menu-scroll-area">
+                <!-- Mode Switcher -->
+                <div class="menu-section">
+                    <div class="mode-toggle-pill">
+                        <button class="switch-btn active" data-opp="ai">
+                            <span class="emoji">🤖</span> Vs AI
+                        </button>
+                        <button class="switch-btn" data-opp="local">
+                            <span class="emoji">👥</span> 2 Player
+                        </button>
                     </div>
                 </div>
-                
-                <div class="victory-buttons">
-                    <button class="btn-primary btn-large" id="next-round-btn">
-                        <span>🎮</span>
-                        Next Round
-                    </button>
-                    <button class="btn-secondary" id="new-game-btn">
-                        <span>🔄</span>
-                        New Game
-                    </button>
-                    <button class="btn-tertiary" id="close-modal-btn">
-                        <span>✖</span>
-                        Close
-                    </button>
+
+                <!-- Game Variants Grid -->
+                <div class="menu-section">
+                    <label>Game Variant</label>
+                    <div class="variants-grid">
+                        <button class="variant-card active" data-mode="classic">
+                            <div class="v-icon">📱</div>
+                            <div class="v-info">
+                                <span class="v-title">Classic</span>
+                                <span class="v-desc">Standard 3x3 Grid</span>
+                            </div>
+                            <div class="v-check">✓</div>
+                        </button>
+
+                        <button class="variant-card" data-mode="switch">
+                            <div class="v-icon">🔄</div>
+                            <div class="v-info">
+                                <span class="v-title">Switch</span>
+                                <span class="v-desc">Max 3 pieces. Move to win.</span>
+                            </div>
+                            <div class="v-check">✓</div>
+                        </button>
+
+                        <button class="variant-card" data-mode="rapid">
+                            <div class="v-icon">⚡</div>
+                            <div class="v-info">
+                                <span class="v-title">Rapid</span>
+                                <span class="v-desc">10x10 Grid. 5 in a row.</span>
+                            </div>
+                            <div class="v-check">✓</div>
+                        </button>
+
+                        <button class="variant-card" data-mode="guess">
+                            <div class="v-icon">👻</div>
+                            <div class="v-info">
+                                <span class="v-title">Ghost</span>
+                                <span class="v-desc">Invisible Marks. Memory test.</span>
+                            </div>
+                            <div class="v-check">✓</div>
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Inputs -->
+                <div class="menu-section split-inputs">
+                    <div class="input-group">
+                        <label>Player X</label>
+                        <input type="text" id="input-p1" value="You" placeholder="Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Player O</label>
+                        <input type="text" id="input-p2" value="CPU" disabled placeholder="Name">
+                    </div>
+                </div>
+
+                <!-- AI Difficulty -->
+                <div class="menu-section hidden" id="ai-difficulty-group">
+                    <label>AI Core Level</label>
+                    <div class="diff-slider-container">
+                        <button class="diff-btn" data-diff="easy">Easy</button>
+                        <button class="diff-btn active" data-diff="medium">Medium</button>
+                        <button class="diff-btn" data-diff="hard">Impossible</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-footer">
+                <button id="start-match-btn" class="btn-launch">
+                    Start Game
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Game Info Modal -->
-    <div class="modal-overlay hide" id="info-modal">
-        <div class="info-modal">
-            <div class="info-content">
-                <div class="info-header">
-                    <h3 class="info-title">🎯 Modern Tic-Tac-Toe</h3>
-                    <button class="close-btn" id="close-info-btn">✖</button>
-                </div>
-                
-                <div class="info-body">
-                    <div class="info-section">
-                        <h4>🎮 How to Play</h4>
-                        <ul>
-                            <li>Players take turns placing X and O on the 3×3 grid</li>
-                            <li>First player to get 3 in a row wins</li>
-                            <li>Use mouse clicks or keyboard (1-9 keys)</li>
-                            <li>Press 'R' to reset, 'ESC' to close modals</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h4>✨ Features</h4>
-                        <ul>
-                            <li>Custom player names and scoring</li>
-                            <li>Sound effects and visual animations</li>
-                            <li>Keyboard shortcuts and accessibility</li>
-                            <li>Game statistics and history tracking</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="info-section">
-                        <h4>⌨️ Keyboard Shortcuts</h4>
-                        <div class="shortcuts">
-                            <div class="shortcut">
-                                <kbd>1-9</kbd>
-                                <span>Select cell</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>R</kbd>
-                                <span>Reset game</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>ESC</kbd>
-                                <span>Close modal</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>Space</kbd>
-                                <span>Toggle sound</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="info-footer">
-                    <p class="credits">
-                        Made with ❤️ by Modern Games Studio
-                        <br>
-                        <small>Version 2.0 - Enhanced Edition</small>
-                    </p>
-                </div>
+    <!-- RESULT MODAL -->
+    <div id="result-modal" class="modal-overlay">
+        <div class="modal-card result-card text-center">
+            <div class="result-decoration">🏆</div>
+            <h2 id="winner-text" class="gradient-text">Victory!</h2>
+            <p id="wintype-text" class="subtext">Well played.</p>
+
+            <div class="modal-actions vertical-stack">
+                <button id="next-round-modal-btn" class="btn btn-primary full-width">Play Next Round</button>
+                <button id="menu-modal-btn" class="btn btn-secondary full-width">Return to Menu</button>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="game-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <span class="footer-logo">🎯</span>
-                <span class="footer-title">Modern Tic-Tac-Toe</span>
-            </div>
-            
-            <div class="footer-links">
-                <button class="footer-link" id="footer-info-btn">About</button>
-                <button class="footer-link" id="footer-help-btn">Help</button>
-                <button class="footer-link" id="footer-feedback-btn">Feedback</button>
-            </div>
-            
-            <div class="footer-social">
-                <span class="footer-text">Share your high score!</span>
-                <div class="social-buttons">
-                    <button class="social-btn" title="Share on Twitter">🐦</button>
-                    <button class="social-btn" title="Share on Facebook">📘</button>
-                    <button class="social-btn" title="Copy Game Link">🔗</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 Modern Games Studio. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="script-new.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Logic for X close button -->
+    <script>
+        document.getElementById('close-setup-btn').addEventListener('click', () => {
+            document.getElementById('setup-modal').classList.remove('visible');
+        });
+    </script>
 </body>
 </html>
