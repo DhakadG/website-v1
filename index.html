@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Tic-Tac-Toe | Ultimate Gaming Experience</title>
+    <meta name="description" content="Play the most advanced Tic-Tac-Toe game with stunning visuals, sound effects, and customizable player names.">
+    <meta name="keywords" content="tic-tac-toe, game, online, modern, interactive">
+    <meta name="author" content="Modern Games Studio">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+<body>
+    <!-- Player Setup Modal -->
+    <div class="modal-overlay" id="setup-modal">
+        <div class="setup-modal">
+            <div class="setup-content">
+                <div class="setup-header">
+                    <div class="setup-icon">🎮</div>
+                    <h2 class="setup-title">Welcome to Modern Tic-Tac-Toe</h2>
+                    <p class="setup-subtitle">The Ultimate Gaming Experience</p>
+                </div>
+                
+                <div class="setup-form">
+                    <div class="player-setup">
+                        <div class="player-input-group">
+                            <label for="player1-name" class="player-label">
+                                <span class="player-symbol x-symbol">✖</span>
+                                Player 1 (X)
+                            </label>
+                            <input 
+                                type="text" 
+                                id="player1-name" 
+                                class="player-input" 
+                                placeholder="Enter Player 1 name" 
+                                maxlength="15"
+                                autocomplete="off"
+                            >
+                        </div>
+                        
+                        <div class="vs-divider">
+                            <span class="vs-text">VS</span>
+                        </div>
+                        
+                        <div class="player-input-group">
+                            <label for="player2-name" class="player-label">
+                                <span class="player-symbol o-symbol">⭕</span>
+                                Player 2 (O)
+                            </label>
+                            <input 
+                                type="text" 
+                                id="player2-name" 
+                                class="player-input" 
+                                placeholder="Enter Player 2 name" 
+                                maxlength="15"
+                                autocomplete="off"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="setup-actions">
+                        <button class="btn-primary btn-large" id="start-game-btn">
+                            <span>🚀</span>
+                            Start Game
+                        </button>
+                        <button class="btn-secondary" id="quick-start-btn">
+                            <span>⚡</span>
+                            Quick Start
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-features">
+                    <div class="feature">
+                        <span class="feature-icon">🎨</span>
+                        <span class="feature-text">Modern UI</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🔊</span>
+                        <span class="feature-text">Sound Effects</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">📊</span>
+                        <span class="feature-text">Score Tracking</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">⌨️</span>
+                        <span class="feature-text">Keyboard Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Game Header -->
+    <header class="game-header">
+        <div class="brand-section">
+            <div class="game-logo">
+                <span class="logo-icon">🎯</span>
+                <h1 class="game-title">
+                    <span class="title-gradient">TIC</span>
+                    <span class="title-outline">TAC</span>
+                    <span class="title-gradient">TOE</span>
+                </h1>
+                <span class="game-tagline">Modern Gaming Experience</span>
+            </div>
+            
+            <div class="game-info">
+                <button class="info-btn" id="info-btn" title="Game Information">
+                    <span>ℹ️</span>
+                </button>
+                <button class="settings-btn" id="settings-btn" title="Game Settings">
+                    <span>⚙️</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="game-stats">
+            <div class="score-board">
+                <div class="player-score" id="player1-section">
+                    <div class="player-avatar x-avatar">
+                        <span class="avatar-symbol">✖</span>
+                    </div>
+                    <div class="player-info">
+                        <span class="player-name" id="player1-display">Player 1</span>
+                        <span class="score" id="scoreX">0</span>
+                    </div>
+                </div>
+                
+                <div class="score-divider">
+                    <div class="round-info">
+                        <span class="round-label">Round</span>
+                        <span class="round-number" id="round-number">1</span>
+                    </div>
+                </div>
+                
+                <div class="player-score" id="player2-section">
+                    <div class="player-info">
+                        <span class="player-name" id="player2-display">Player 2</span>
+                        <span class="score" id="scoreO">0</span>
+                    </div>
+                    <div class="player-avatar o-avatar">
+                        <span class="avatar-symbol">⭕</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="current-turn">
+                <div class="turn-indicator" id="turn-indicator-container">
+                    <span class="turn-icon" id="turn-icon">✖</span>
+                    <span class="turn-text" id="turn-indicator">Player 1's Turn</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Container -->
+    <main class="game-main">
+        <div class="game-container">
+            <div class="game-board-wrapper">
+                <div class="game-board" id="game-board">
+                    <button class="box" data-index="0" aria-label="Cell 1"></button>
+                    <button class="box" data-index="1" aria-label="Cell 2"></button>
+                    <button class="box" data-index="2" aria-label="Cell 3"></button>
+                    <button class="box" data-index="3" aria-label="Cell 4"></button>
+                    <button class="box" data-index="4" aria-label="Cell 5"></button>
+                    <button class="box" data-index="5" aria-label="Cell 6"></button>
+                    <button class="box" data-index="6" aria-label="Cell 7"></button>
+                    <button class="box" data-index="7" aria-label="Cell 8"></button>
+                    <button class="box" data-index="8" aria-label="Cell 9"></button>
+                </div>
+                
+                <div class="winning-line" id="winning-line"></div>
+            </div>
+            
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <div class="primary-controls">
+                    <button class="btn-primary reset-btn" id="reset-btn">
+                        <span>🔄</span>
+                        New Round
+                    </button>
+                    <button class="btn-secondary change-names-btn" id="change-names-btn">
+                        <span>👤</span>
+                        Change Names
+                    </button>
+                </div>
+                
+                <div class="secondary-controls">
+                    <button class="btn-secondary sound-toggle" id="sound-toggle">
+                        <span id="sound-icon">🔊</span>
+                        Sound
+                    </button>
+                    <button class="btn-secondary theme-toggle" id="theme-toggle">
+                        <span>🎨</span>
+                        Theme
+                    </button>
+                    <button class="btn-secondary fullscreen-btn" id="fullscreen-btn">
+                        <span>📱</span>
+                        Fullscreen
+                    </button>
+                </div>
+                
+                <div class="game-stats-mini">
+                    <div class="stat-item">
+                        <span class="stat-label">Games Played</span>
+                        <span class="stat-value" id="games-played">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Moves</span>
+                        <span class="stat-value" id="total-moves">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Victory Modal -->
+    <div class="modal-overlay hide" id="victory-modal">
+        <div class="victory-modal">
+            <div class="victory-content">
+                <div class="victory-header">
+                    <div class="victory-icon" id="victory-icon">🏆</div>
+                    <h2 class="victory-title" id="victory-title">Congratulations!</h2>
+                    <p class="victory-message" id="victory-message">Player 1 Wins!</p>
+                </div>
+                
+                <div class="victory-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Winning Pattern:</span>
+                        <span class="stat-value" id="winning-pattern">Row 1</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Moves Made:</span>
+                        <span class="stat-value" id="moves-count">5</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Game Duration:</span>
+                        <span class="stat-value" id="game-duration">0:45</span>
+                    </div>
+                </div>
+                
+                <div class="victory-buttons">
+                    <button class="btn-primary btn-large" id="next-round-btn">
+                        <span>🎮</span>
+                        Next Round
+                    </button>
+                    <button class="btn-secondary" id="new-game-btn">
+                        <span>🔄</span>
+                        New Game
+                    </button>
+                    <button class="btn-tertiary" id="close-modal-btn">
+                        <span>✖</span>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Info Modal -->
+    <div class="modal-overlay hide" id="info-modal">
+        <div class="info-modal">
+            <div class="info-content">
+                <div class="info-header">
+                    <h3 class="info-title">🎯 Modern Tic-Tac-Toe</h3>
+                    <button class="close-btn" id="close-info-btn">✖</button>
+                </div>
+                
+                <div class="info-body">
+                    <div class="info-section">
+                        <h4>🎮 How to Play</h4>
+                        <ul>
+                            <li>Players take turns placing X and O on the 3×3 grid</li>
+                            <li>First player to get 3 in a row wins</li>
+                            <li>Use mouse clicks or keyboard (1-9 keys)</li>
+                            <li>Press 'R' to reset, 'ESC' to close modals</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h4>✨ Features</h4>
+                        <ul>
+                            <li>Custom player names and scoring</li>
+                            <li>Sound effects and visual animations</li>
+                            <li>Keyboard shortcuts and accessibility</li>
+                            <li>Game statistics and history tracking</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h4>⌨️ Keyboard Shortcuts</h4>
+                        <div class="shortcuts">
+                            <div class="shortcut">
+                                <kbd>1-9</kbd>
+                                <span>Select cell</span>
+                            </div>
+                            <div class="shortcut">
+                                <kbd>R</kbd>
+                                <span>Reset game</span>
+                            </div>
+                            <div class="shortcut">
+                                <kbd>ESC</kbd>
+                                <span>Close modal</span>
+                            </div>
+                            <div class="shortcut">
+                                <kbd>Space</kbd>
+                                <span>Toggle sound</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-footer">
+                    <p class="credits">
+                        Made with ❤️ by Modern Games Studio
+                        <br>
+                        <small>Version 2.0 - Enhanced Edition</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">🎯</span>
+                <span class="footer-title">Modern Tic-Tac-Toe</span>
+            </div>
+            
+            <div class="footer-links">
+                <button class="footer-link" id="footer-info-btn">About</button>
+                <button class="footer-link" id="footer-help-btn">Help</button>
+                <button class="footer-link" id="footer-feedback-btn">Feedback</button>
+            </div>
+            
+            <div class="footer-social">
+                <span class="footer-text">Share your high score!</span>
+                <div class="social-buttons">
+                    <button class="social-btn" title="Share on Twitter">🐦</button>
+                    <button class="social-btn" title="Share on Facebook">📘</button>
+                    <button class="social-btn" title="Copy Game Link">🔗</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Modern Games Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script-new.js"></script>
+</body>
+</html>
